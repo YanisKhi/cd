@@ -1,11 +1,9 @@
-name: Action
-
+name: Build App
+#oui
 on:
-  # Trigger analysis when pushing in master or pull requests, and when creating
-  # a pull request. 
-  push:
-    branches:
-      - master
+    push:
+        branches:
+        - main
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -19,32 +17,6 @@ jobs:
             registry: docker.io
             repository: YanisKhi/cd
             tag_with_sha: true
-    sonarcloud:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v2
-        with:
-        # Disabling shallow clone is recommended for improving relevancy of reportingg
-          fetch-depth: 0
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    owasp:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Install NPM dependencies
-          run: |
-            npm install --production --unsafe-perm
-        - uses: sburris/dependency-check-action@master
-          with:
-            Project-Name: TestApp
-        - name: Archive dependency check reports
-          uses: actions/upload-artifact@v1
-          with:
-            name: reports
-            path: reports
+
     
 
