@@ -20,18 +20,7 @@ jobs:
           uses: actions/upload-artifact@v1
           with:
             name: reports
-            path: reports
-        - name: Run Trivy vulnerability scanner
-          uses: aquasecurity/trivy-action@master
-          with:
-            image-ref: 'docker.io/yani1erdunom/my-app:latest'
-            format: 'template'
-            template: '@/contrib/sarif.tpl'
-            output: 'trivy-results.sarif'
-        - name: Upload Trivy scan results to GitHub Security tab
-          uses: github/codeql-action/upload-sarif@v1
-          with:
-            sarif_file: 'trivy-results.sarif'
+            path: reports        
     build:
         runs-on: ubuntu-latest
         steps:
@@ -45,3 +34,14 @@ jobs:
             repository: yani1erdunom/cd
             #tag_with_sha: true
             tags: latest
+        - name: Run Trivy vulnerability scanner
+          uses: aquasecurity/trivy-action@master
+          with:
+            image-ref: 'docker.io/yani1erdunom/my-app:latest'
+            format: 'template'
+            template: '@/contrib/sarif.tpl'
+            output: 'trivy-results.sarif'
+        - name: Upload Trivy scan results to GitHub Security tab
+          uses: github/codeql-action/upload-sarif@v1
+          with:
+            sarif_file: 'trivy-results.sarif'
