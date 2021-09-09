@@ -1,4 +1,4 @@
-name: Buil vApp
+name: Build App
 #oui
 on:
     push:
