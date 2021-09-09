@@ -18,3 +18,4 @@ jobs:
             registry: docker.io
             repository: yani1erdunom/cd
             tag_with_sha: true
+    
