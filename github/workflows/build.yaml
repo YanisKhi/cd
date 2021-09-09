@@ -14,7 +14,7 @@ jobs:
           uses: docker/build-push-action@v1
           with:
             username: ${{ secrets.yani1erdunom }}
-            password: ${{ secrets.DOCKER_PASSWORD }}
+            password: ${{ secrets.Iselith06 }}
             registry: docker.io
-            repository: <your-dockerhub-username>/cd
+            repository: yani1erdunom/cd
             tag_with_sha: true
