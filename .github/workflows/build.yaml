@@ -1,25 +1,10 @@
-name: BuildvApp
+name: Buil vApp
 #oui
 on:
     push:
         branches:
         - main
 jobs:
-    owasp:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Install NPM dependencies
-          run: |
-            npm install --production --unsafe-perm
-        - uses: sburris/dependency-check-action@master
-          with:
-            Project-Name: TestApp
-        - name: Archive dependency check reports
-          uses: actions/upload-artifact@v1
-          with:
-            name: reports
-            path: reports
     build:
         runs-on: ubuntu-latest
         steps:
