@@ -13,7 +13,7 @@ jobs:
         - name: build-push
           uses: docker/build-push-action@v1
           with:
-            username: ${{ secrets.DOCKER_USERNAME }}
+            username: ${{ secrets.yani1erdunom }}
             password: ${{ secrets.DOCKER_PASSWORD }}
             registry: docker.io
             repository: <your-dockerhub-username>/cd
