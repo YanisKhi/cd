@@ -1,4 +1,4 @@
-name: SonarQube app
+name: Action
 
 on:
   # Trigger analysis when pushing in master or pull requests, and when creating
@@ -19,6 +19,15 @@ jobs:
             registry: docker.io
             repository: YanisKhi/cd
             tag_with_sha: true
+        - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
     sonarcloud:
       runs-on: ubuntu-latest
       steps:
