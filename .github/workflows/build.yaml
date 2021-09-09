@@ -6,9 +6,19 @@ on:
   push:
     branches:
       - master
-  pull_request:
-      types: [opened, synchronize, reopened]
 jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: build-push
+          uses: docker/build-push-action@v1
+          with:
+            username: ${{ secrets.DOCKER_USERNAME}}
+            password: ${{ secrets.DOCKER_PASSWORD}}
+            registry: docker.io
+            repository: YanisKhi/cd
+            tag_with_sha: true
     sonarcloud:
       runs-on: ubuntu-latest
       steps:
@@ -36,16 +46,5 @@ jobs:
           with:
             name: reports
             path: reports
-    build:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: build-push
-          uses: docker/build-push-action@v1
-          with:
-            username: ${{ secrets.DOCKER_USERNAME}}
-            password: ${{ secrets.DOCKER_PASSWORD}}
-            registry: docker.io
-            repository: YanisKhi/cd
-            tag_with_sha: true
+    
 
